@@ -55,6 +55,10 @@
        PROCEDURE DIVISION.
       *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
        MAIN-PROCEDURE.
+           DISPLAY "Input Board Size:".
+           ACCEPT PLAYFIELD-SIZE.
+           DISPLAY "Input Number of Mines:".
+           ACCEPT TOTAL-MINES.
            PERFORM GENERATE-MINES.
            PERFORM CALCULATE-SURROUNDING.
            PERFORM GAME UNTIL GAME-DONE EQUALS 1.
@@ -193,17 +197,14 @@
                ADD 1 TO Y
            END-PERFORM.
 
-
        CHECK-WIN.
            MOVE 1 TO Y.
            MOVE 1 TO X.
-           MOVE PLAYFIELD-SIZE TO MINE-COUNT.
-           MULTIPLY 2 BY MINE-COUNT.
-
+           MOVE 0 TO MINE-COUNT.
            PERFORM UNTIL Y > PLAYFIELD-SIZE
                 PERFORM UNTIL X > PLAYFIELD-SIZE
                     IF VIS(X, Y) EQUALS 0 THEN
-                        SUBTRACT 1 FROM MINE-COUNT
+                        ADD 1 TO MINE-COUNT
                     END-IF
                     ADD 1 TO X
                 END-PERFORM
